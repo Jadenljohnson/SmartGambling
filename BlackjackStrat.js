@@ -1,120 +1,130 @@
-
 import { hardStrategy_noncount } from "./BlackjackstratTable.js";
 import { softStrategy_noncount } from "./BlackjackstratTable.js";
 import { pairStrategy_noncount } from "./BlackjackstratTable.js";
 import { hardDeviations } from "./BlackjackstratTable.js";
 import { softDeviations } from "./BlackjackstratTable.js";
 import { pairDeviations } from "./BlackjackstratTable.js";
+
 import readline from 'node:readline/promises';
 import { stdin as input, stdout as output } from 'node:process';
-function normalize(card) {
-  if (["J", "Q", "K"].includes(card)) return "10";
-  return card;
+
+function normalize(str_card) {
+  if (["J", "Q", "K"].includes(str_card)) return "10";
+  return str_card;
 }
 
-function calculateHandValue(hand) {
-  let total = 0;
-  let aces = 0;
-  for (let card of hand) {
-    card = normalize(card);
-    if (card === "A") {
-      aces++;
-      total += 11;
+function calculateHandValue(arr_hand) {
+  let int_total = 0;
+  let int_aces = 0;
+  for (let str_card of arr_hand) {
+    str_card = normalize(str_card);
+    if (str_card === "A") {
+      int_aces++;
+      int_total += 11;
     } else {
-      total += parseInt(card);
+      int_total += parseInt(str_card);
     }
   }
-  while (total > 21 && aces > 0) {
-    total -= 10;
-    aces--;
+  while (int_total > 21 && int_aces > 0) {
+    int_total -= 10;
+    int_aces--;
   }
-  return total;
+  return int_total;
 }
 
-function isPair(hand) {
-  return hand.length === 2 && normalize(hand[0]) === normalize(hand[1]);
+function isPair(arr_hand) {
+  return arr_hand.length === 2 && normalize(arr_hand[0]) === normalize(arr_hand[1]);
 }
 
-function isSoft(hand) {
-  return hand.includes("A") && calculateHandValue(hand) <= 21;
+function isSoft(arr_hand) {
+  return arr_hand.includes("A") && calculateHandValue(arr_hand) <= 21;
 }
 
-function findDeviation(handType, playerKey, dealerCard, trueCount) {
-  const deviationSets = {
+function findDeviation(str_handType, str_playerKey, str_dealerCard, int_trueCount) {
+  const obj_deviationSets = {
     hard: hardDeviations,
     soft: softDeviations,
     pair: pairDeviations,
   };
-  const deviations = deviationSets[handType] || [];
-  for (const dev of deviations) {
-    if (dev.player === playerKey && dev.dealer === dealerCard) {
-      const condition = dev.condition.replace(/TC/g, trueCount);
-      if (eval(condition)) return dev.action;
+  const arr_deviations = obj_deviationSets[str_handType] || [];
+  for (const obj_dev of arr_deviations) {
+    if (obj_dev.player === str_playerKey && obj_dev.dealer === str_dealerCard) {
+      const str_condition = obj_dev.condition.replace(/TC/g, int_trueCount);
+      if (eval(str_condition)) return obj_dev.action;
     }
   }
   return null;
 }
 
 export function getOptimalMove({
-  playerHand,
-  dealerCard,
-  canSplit = true,
-  canDouble = true,
-  trueCount = null,
+  arr_playerHand,
+  str_dealerCard,
+  bool_canSplit = true,
+  bool_canDouble = true,
+  int_trueCount = null,
 }) {
-  dealerCard = normalize(dealerCard);
-  const total = calculateHandValue(playerHand);
-
+  str_dealerCard = normalize(str_dealerCard);
+  const int_total = calculateHandValue(arr_playerHand);
+  if (int_total == 21) {
+    return "Stand"
+  }
   // Pair logic
-  if (isPair(playerHand)) {
-    const pairValue = normalize(playerHand[0]) + normalize(playerHand[1]);
-    if (trueCount !== null) {
-      const deviation = findDeviation("pair", pairValue, dealerCard, trueCount);
-      if (deviation) return deviation;
+  if (isPair(arr_playerHand)) {
+    const str_pairValue = normalize(arr_playerHand[0]) + normalize(arr_playerHand[1]);
+    if (int_trueCount !== null) {
+      const str_deviation = findDeviation("pair", str_pairValue, str_dealerCard, int_trueCount);
+      if (str_deviation) return str_deviation;
     }
-    return pairStrategy_noncount[normalize(playerHand[0])]?.[dealerCard] || "Hit";
+    return pairStrategy_noncount[normalize(arr_playerHand[0])]?.[str_dealerCard] || "Hit";
   }
 
   // Soft total logic
-  if (isSoft(playerHand) && total >= 13 && total <= 20) {
-    if (trueCount !== null) {
-      const playerKey = normalize(playerHand.includes("A") ? playerHand[0] === "A" ? playerHand[0] + normalize(playerHand[1]) : normalize(playerHand[0]) + "A" : "");
-      const deviation = findDeviation("soft", playerKey, dealerCard, trueCount);
-      if (deviation) return deviation;
+  if (isSoft(arr_playerHand) && int_total >= 13 && int_total <= 20) {
+    if (int_trueCount !== null) {
+      const str_playerKey = normalize(
+        arr_playerHand.includes("A")
+          ? arr_playerHand[0] === "A"
+            ? arr_playerHand[0] + normalize(arr_playerHand[1])
+            : normalize(arr_playerHand[0]) + "A"
+          : ""
+      );
+      const str_deviation = findDeviation("soft", str_playerKey, str_dealerCard, int_trueCount);
+      if (str_deviation) return str_deviation;
     }
-    return softStrategy_noncount[total]?.[dealerCard] || "Hit";
+    return softStrategy_noncount[int_total]?.[str_dealerCard] || "Hit";
   }
 
   // Hard total logic
-  if (trueCount !== null) {
-    const deviation = findDeviation("hard", total.toString(), dealerCard, trueCount);
-    if (deviation) return deviation;
+  if (int_trueCount !== null) {
+    const str_deviation = findDeviation("hard", int_total.toString(), str_dealerCard, int_trueCount);
+    if (str_deviation) return str_deviation;
   }
-  return hardStrategy_noncount[total]?.[dealerCard] || "Hit";
+  return hardStrategy_noncount[int_total]?.[str_dealerCard] || "Hit";
 }
 
-const rl = readline.createInterface({ input, output });
 
-console.log("🃏 Blackjack Strategy Tester");
+// const rl = readline.createInterface({ input, output });
 
-try {
-  const handStr = await rl.question("Enter your hand (space-separated): ");
-  const dealer = await rl.question("Enter dealer upcard: ");
-  const tcStr = await rl.question("Enter true count (or blank): ");
+// console.log("🃏 Blackjack Strategy Tester");
 
-  const hand = handStr.trim().split(" ");
-  const dealerCard = dealer.trim().toUpperCase();
-  const trueCount = tcStr.trim() === "" ? null : parseInt(tcStr.trim());
+// try {
+//   const str_handInput = await rl.question("Enter your hand (space-separated): ");
+//   const str_dealerInput = await rl.question("Enter dealer upcard: ");
+//   const str_tcInput = await rl.question("Enter true count (or blank): ");
 
-  const result = getOptimalMove({
-    playerHand: hand,
-    dealerCard,
-    trueCount,
-  });
+//   const arr_hand = str_handInput.trim().split(" ");
+//   const str_dealerCard = str_dealerInput.trim().toUpperCase();
+//   const int_trueCount = str_tcInput.trim() === "" ? null : parseInt(str_tcInput.trim());
 
-  console.log(`\n✅ Optimal Move: ${result}`);
-} catch (err) {
-  console.error("❌ Error:", err);
-} finally {
-  rl.close();
-}
+//   const str_result = getOptimalMove({
+//     arr_playerHand: arr_hand,
+//     str_dealerCard,
+//     int_trueCount,
+//   });
+
+//   console.log(`\n✅ Optimal Move: ${str_result}`);
+// } catch (err) {
+//   console.error("❌ Error:", err);
+// } finally {
+//   rl.close();
+// }
