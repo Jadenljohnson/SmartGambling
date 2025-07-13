@@ -1,4 +1,7 @@
 export const hardStrategy_noncount = {
+  "20": {"2": "Stand", "3": "Stand", "4": "Stand", "5": "Stand", "6": "Stand", "7": "Stand", "8": "Stand", "9": "Stand", "10": "Stand", "A": "Stand"},
+  "19": {"2": "Stand", "3": "Stand", "4": "Stand", "5": "Stand", "6": "Stand", "7": "Stand", "8": "Stand", "9": "Stand", "10": "Stand", "A": "Stand"},
+  "18": {"2": "Stand", "3": "Stand", "4": "Stand", "5": "Stand", "6": "Stand", "7": "Stand", "8": "Stand", "9": "Stand", "10": "Stand", "A": "Stand"},
   "17": {"2": "Stand", "3": "Stand", "4": "Stand", "5": "Stand", "6": "Stand", "7": "Stand", "8": "Stand", "9": "Stand", "10": "Stand", "A": "Stand"},
   "16": {"2": "Stand", "3": "Stand", "4": "Stand", "5": "Stand", "6": "Stand", "7": "Hit", "8": "Hit", "9": "Hit", "10": "Hit", "A": "Hit"},
   "15": {"2": "Stand", "3": "Stand", "4": "Stand", "5": "Stand", "6": "Stand", "7": "Hit", "8": "Hit", "9": "Hit", "10": "Hit", "A": "Hit"},

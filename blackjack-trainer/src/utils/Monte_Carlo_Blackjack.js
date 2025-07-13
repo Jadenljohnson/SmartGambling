@@ -78,12 +78,9 @@ export async function runMonteCarlo(arr_startingHand, str_dealerUpcard, int_sims
   };
 
   console.log(`\n🔁 Simulated ${int_sims} hands of Blackjack`);
-  console.log(`✅ Win: ${obj_results.win}%`);
-  console.log(`🤝 Push: ${obj_results.push}%`);
-  console.log(`❌ Loss: ${obj_results.loss}%`);
+  console.log(`Win: ${obj_results.win}%`);
+  console.log(`Push: ${obj_results.push}%`);
+  console.log(`Loss: ${obj_results.loss}%`);
 
   return obj_results;
 }
-
-// Example run
-runMonteCarlo(["A", "8"], "2", 10000);

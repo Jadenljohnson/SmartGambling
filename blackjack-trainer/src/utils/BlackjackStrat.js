@@ -5,9 +5,6 @@ import { hardDeviations } from "./BlackjackstratTable.js";
 import { softDeviations } from "./BlackjackstratTable.js";
 import { pairDeviations } from "./BlackjackstratTable.js";
 
-import readline from 'node:readline/promises';
-import { stdin as input, stdout as output } from 'node:process';
-
 function normalize(str_card) {
   if (["J", "Q", "K"].includes(str_card)) return "10";
   return str_card;
@@ -68,6 +65,7 @@ export function getOptimalMove({
   if (int_total == 21) {
     return "Stand"
   }
+
   // Pair logic
   if (isPair(arr_playerHand)) {
     const str_pairValue = normalize(arr_playerHand[0]) + normalize(arr_playerHand[1]);
@@ -102,29 +100,3 @@ export function getOptimalMove({
   return hardStrategy_noncount[int_total]?.[str_dealerCard] || "Hit";
 }
 
-
-// const rl = readline.createInterface({ input, output });
-
-// console.log("🃏 Blackjack Strategy Tester");
-
-// try {
-//   const str_handInput = await rl.question("Enter your hand (space-separated): ");
-//   const str_dealerInput = await rl.question("Enter dealer upcard: ");
-//   const str_tcInput = await rl.question("Enter true count (or blank): ");
-
-//   const arr_hand = str_handInput.trim().split(" ");
-//   const str_dealerCard = str_dealerInput.trim().toUpperCase();
-//   const int_trueCount = str_tcInput.trim() === "" ? null : parseInt(str_tcInput.trim());
-
-//   const str_result = getOptimalMove({
-//     arr_playerHand: arr_hand,
-//     str_dealerCard,
-//     int_trueCount,
-//   });
-
-//   console.log(`\n✅ Optimal Move: ${str_result}`);
-// } catch (err) {
-//   console.error("❌ Error:", err);
-// } finally {
-//   rl.close();
-// }
