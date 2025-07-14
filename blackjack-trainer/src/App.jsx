@@ -1,13 +1,20 @@
 import React from "react";
+import { Routes, Route, Link } from "react-router-dom";
 import TrainerPage from "./pages/TrainerPage";
+import GuessPage from "./pages/GuessPage";
 
-function App() {
+export default function App() {
   return (
-    <div className="App">
-      <h1>♠️ Blackjack Strategy Trainer</h1>
-      <TrainerPage />
+    <div style={{ padding: "2rem" }}>
+      <nav style={{ marginBottom: "2rem" }}>
+        <Link to="/" style={{ marginRight: "1rem" }}>🏋️ Trainer</Link>
+        <Link to="/guess">🧠 Guess the Move</Link>
+      </nav>
+
+      <Routes>
+        <Route path="/" element={<TrainerPage />} />
+        <Route path="/guess" element={<GuessPage />} />
+      </Routes>
     </div>
   );
 }
-
-export default App;

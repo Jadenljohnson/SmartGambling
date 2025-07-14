@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import {getOptimalMove} from "../utils/BlackjackStrat";
 import {runMonteCarlo} from "../utils/Monte_Carlo_Blackjack"
+import BlackjackTable from "../components/BlackjackTable";
 export default function TrainerPage(){
     const [arr_playerHand, setArr_playerHand] = useState(["2", "2"]);
     const [str_dealerCard, setStr_dealerCard] = useState("2");
@@ -64,7 +65,10 @@ export default function TrainerPage(){
                 </ul>
             </div>
             )}
-
+            <BlackjackTable
+                arr_dealerHand={[str_dealerCard]} // or add 2nd card if simulating full hand
+                arr_playerHand={arr_playerHand}
+            />
 
         </div>
     );

@@ -32,9 +32,9 @@ export const pairStrategy_noncount = {
   "7": {"2": "Split", "3": "Split", "4": "Split", "5": "Split", "6": "Split", "7": "Split", "8": "Split", "9": "NoSplit", "10": "NoSplit", "A": "NoSplit"},
   "6": {"2": "Split", "3": "Split", "4": "Split", "5": "Split", "6": "Split", "7": "NoSplit", "8": "NoSplit", "9": "NoSplit", "10": "NoSplit", "A": "NoSplit"},
   "5": {"2": "NoSplit", "3": "NoSplit", "4": "NoSplit", "5": "NoSplit", "6": "NoSplit", "7": "NoSplit", "8": "NoSplit", "9": "NoSplit", "10": "NoSplit", "A": "NoSplit"},
-  "4": {"2": "NoSplit", "3": "NoSplit", "4": "NoSplit", "5": "SplitIfDAS", "6": "SplitIfDAS", "7": "NoSplit", "8": "NoSplit", "9": "NoSplit", "10": "NoSplit", "A": "NoSplit"},
-  "3": {"2": "SplitIfDAS", "3": "SplitIfDAS", "4": "Split", "5": "Split", "6": "Split", "7": "Split", "8": "NoSplit", "9": "NoSplit", "10": "NoSplit", "A": "NoSplit"},
-  "2": {"2": "SplitIfDAS", "3": "SplitIfDAS", "4": "Split", "5": "Split", "6": "Split", "7": "Split", "8": "NoSplit", "9": "NoSplit", "10": "NoSplit", "A": "NoSplit"},
+  "4": {"2": "NoSplit", "3": "NoSplit", "4": "NoSplit", "5": "Split", "6": "Split", "7": "NoSplit", "8": "NoSplit", "9": "NoSplit", "10": "NoSplit", "A": "NoSplit"},
+  "3": {"2": "Split", "3": "Split", "4": "Split", "5": "Split", "6": "Split", "7": "Split", "8": "NoSplit", "9": "NoSplit", "10": "NoSplit", "A": "NoSplit"},
+  "2": {"2": "Split", "3": "Split", "4": "Split", "5": "Split", "6": "Split", "7": "Split", "8": "NoSplit", "9": "NoSplit", "10": "NoSplit", "A": "NoSplit"},
 };
 export const hardDeviations = [
   { "player": "16", "dealer": "9",  "condition": "TC >= 4",  "action": "Stand" },

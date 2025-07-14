@@ -73,7 +73,17 @@ export function getOptimalMove({
       const str_deviation = findDeviation("pair", str_pairValue, str_dealerCard, int_trueCount);
       if (str_deviation) return str_deviation;
     }
-    return pairStrategy_noncount[normalize(arr_playerHand[0])]?.[str_dealerCard] || "Hit";
+    const str_pairResponse = pairStrategy_noncount[normalize(arr_playerHand[0])]?.[str_dealerCard];
+    if (str_pairResponse === "NoSplit") {
+      // Fallback to hard strategy
+      const int_total = calculateHandValue(arr_playerHand);
+      if (int_trueCount !== null) {
+        const str_dev = findDeviation("hard", int_total.toString(), str_dealerCard, int_trueCount);
+        if (str_dev) return str_dev;
+      }
+      return hardStrategy_noncount[int_total]?.[str_dealerCard] || "Hit";
+    }
+    return str_pairResponse || "Hit";
   }
 
   // Soft total logic
