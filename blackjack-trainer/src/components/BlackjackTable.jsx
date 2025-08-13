@@ -27,14 +27,14 @@ export default function BlackjackTable({ arr_dealerHand, arr_playerHand }) {
         boxShadow: "0 0 20px rgba(0,0,0,0.3)",
       }}
     >
-      <h3>👔 Dealer</h3>
+      <h3>Dealer</h3>
       <div style={{ display: "flex", marginBottom: "2rem" }}>
         {arr_dealerHand.map((str_card, i) => (
           <Card key={`dealer-${i}`} str_card={str_card} />
         ))}
       </div>
 
-      <h3>🧍‍♂️ Player</h3>
+      <h3>Player</h3>
       <div style={{ display: "flex" }}>
         {arr_playerHand.map((str_card, i) => (
           <Card key={`player-${i}`} str_card={str_card} />

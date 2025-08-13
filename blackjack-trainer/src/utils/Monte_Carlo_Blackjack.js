@@ -77,7 +77,7 @@ export async function runMonteCarlo(arr_startingHand, str_dealerUpcard, int_sims
     loss: ((int_loss / int_sims) * 100).toFixed(2),
   };
 
-  console.log(`\n🔁 Simulated ${int_sims} hands of Blackjack`);
+  console.log(`\n Simulated ${int_sims} hands of Blackjack`);
   console.log(`Win: ${obj_results.win}%`);
   console.log(`Push: ${obj_results.push}%`);
   console.log(`Loss: ${obj_results.loss}%`);

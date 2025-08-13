@@ -7,8 +7,8 @@ export default function App() {
   return (
     <div style={{ padding: "2rem" }}>
       <nav style={{ marginBottom: "2rem" }}>
-        <Link to="/" style={{ marginRight: "1rem" }}>🏋️ Trainer</Link>
-        <Link to="/guess">🧠 Guess the Move</Link>
+        <Link to="/" style={{ marginRight: "1rem" }}>Trainer</Link>
+        <Link to="/guess">Guess the Move</Link>
       </nav>
 
       <Routes>

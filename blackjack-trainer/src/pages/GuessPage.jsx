@@ -21,9 +21,9 @@ export default function GuessPage() {
     setStr_correctMove(str_correct);
 
     if (str_correct.includes(str_guess)) {
-      setStr_feedback("✅ Correct!");
+      setStr_feedback("Correct!");
     } else {
-      setStr_feedback("❌ Incorrect.");
+      setStr_feedback("Incorrect.");
     }
   };
 
@@ -37,7 +37,7 @@ export default function GuessPage() {
 
   return (
     <div style={{ padding: "2rem" }}>
-      <h2>🧠 Guess the Optimal Move</h2>
+      <h2>Guess the Optimal Move</h2>
 
       <p>Player Hand: {arr_playerHand.join(", ")}</p>
       <p>Dealer Upcard: {str_dealerCard}</p>
@@ -57,7 +57,7 @@ export default function GuessPage() {
       {str_feedback && (
         <div style={{ marginTop: "1rem" }}>
           <p>{str_feedback}</p>
-          <p>📘 Correct Move: <strong>{str_correctMove}</strong></p>
+          <p>Correct Move: <strong>{str_correctMove}</strong></p>
           <button onClick={handleNewHand}>Try Another</button>
         </div>
       )}

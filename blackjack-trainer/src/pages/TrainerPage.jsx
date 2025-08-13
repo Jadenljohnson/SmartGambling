@@ -15,7 +15,7 @@ export default function TrainerPage(){
         const str_move = getOptimalMove({ arr_playerHand, str_dealerCard });
         console.log(arr_playerHand)
         console.log(str_dealerCard)
-        setStr_result(`✅ Optimal Move: ${str_move}`);
+        setStr_result(`Optimal Move: ${str_move}`);
         setBool_loading(true);
         setTimeout(async () => {
             const obj_result = await runMonteCarlo(arr_playerHand, str_dealerCard, 5000);
@@ -25,7 +25,7 @@ export default function TrainerPage(){
     };
     return(
         <div style={{ padding: "2rem" }}>
-            <h2>🃏 Blackjack Trainer</h2>
+            <h2>Blackjack Trainer</h2>
             <div>
                 <label>Player Card 1:</label>
                 <select onChange={e => setArr_playerHand([e.target.value, arr_playerHand[1]])}>
@@ -59,9 +59,9 @@ export default function TrainerPage(){
             <div style={{ marginTop: "1rem" }}>
                 <h3>📈 Estimated Outcomes (10000 hands, No split or Double):</h3>
                 <ul>
-                <li>✅ Win: {obj_stats.win}%</li>
-                <li>🤝 Push: {obj_stats.push}%</li>
-                <li>❌ Loss: {obj_stats.loss}%</li>
+                <li>Win: {obj_stats.win}%</li>
+                <li>Push: {obj_stats.push}%</li>
+                <li>Loss: {obj_stats.loss}%</li>
                 </ul>
             </div>
             )}
